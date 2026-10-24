@@ -1,0 +1,55 @@
+{
+    "name": "omnifilm/omdb",
+    "type": "library",
+    "description": "Omnifilm's OMDb, under any PHP host: films, series and episodes by their IMDb number with the IMDb, Rotten Tomatoes and Metacritic scores OMDb gathers, a search by title, a season's episodes; its key in the query, its \"N/A\" read as nothing.",
+    "keywords": [
+        "omdb",
+        "imdb",
+        "film",
+        "movie",
+        "tv",
+        "series",
+        "ratings",
+        "rotten-tomatoes",
+        "framework-agnostic",
+        "omnifilm"
+    ],
+    "homepage": "https://github.com/glitchr-studio/omnifilm-omdb",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Meyer",
+            "email": "marco.meyer@glitchr.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "omniscient/omnifilm": "^1.0@dev",
+        "symfony/http-client": "^6.4|^7.0|^8.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omnifilm\\Omdb\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omnifilm\\Omdb\\Tests\\": "Tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-1.x": "1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
