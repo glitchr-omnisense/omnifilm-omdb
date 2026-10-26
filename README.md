@@ -1,6 +1,6 @@
 # omnifilm/omdb
 
-[omniscient/omnifilm](https://github.com/glitchr-studio/omnifilm)'s OMDb, under any PHP host: films,
+[omnisense/omnifilm](https://github.com/glitchr-omnisense/omnifilm)'s OMDb, under any PHP host: films,
 series and episodes by their IMDb number, with the IMDb, Rotten Tomatoes and Metacritic scores OMDb
 gathers; a search by title (its first page: ten answers); a season's episodes. Its `"N/A"` is read
 as nothing; `"Response": "False"` is "not found", or an error when it says the key is wrong or the
