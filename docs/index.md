@@ -160,11 +160,10 @@ omdb tvdb ref      NotSupportedException: OMDb does not find a series by its tvd
 
 A missing `api_key` is an `InvalidConfigException` when the provider is built.
 
-> [!WARNING]
-> Known defect: a network error's `UnreachableException` quotes the URL with its query string, the
-> key included (`... for "https://www.omdbapi.com/?apikey=SECRET-KEY&r=json&i=tt0133093&plot=full".`,
-> seen in a container with no network, 2026-10-26), where the family keeps keys out of messages.
-> Keep these messages out of pages and shared logs.
+A network error is an `UnreachableException` naming the method and the path, then the HTTP
+client's reason without the URL (`OMDb could not be reached for GET /: Could not resolve host:
+www.omdbapi.com.`): the key, which OMDb takes in the query string, stays out of it (the core's
+`JsonClient`). The exception's previous, the HTTP client's, still quotes the URL.
 
 ## Verified, and not
 
