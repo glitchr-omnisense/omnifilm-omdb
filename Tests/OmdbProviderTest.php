@@ -64,6 +64,14 @@ final class OmdbProviderTest extends TestCase
         self::assertSame([], $works[1]->images);
     }
 
+    /** A search on a common word: OMDb answers "Too many results." (recorded, 2026-10-26), an empty search, not an error. */
+    public function testTooManyResultsIsAnEmptySearch(): void
+    {
+        $http = RecordedHttpClient::routes(['~~' => [200, '{"Response":"False","Error":"Too many results."}']]);
+
+        self::assertSame([], self::provider($http)->search(new \Omnifilm\Model\Query('a')));
+    }
+
     public function testNotFoundIsNullAndAWrongKeyAnError(): void
     {
         self::assertNull(self::provider(self::http())->work(WorkRef::imdb('tt0000000')));

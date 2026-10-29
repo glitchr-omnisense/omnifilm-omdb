@@ -50,14 +50,9 @@ No language: OMDb does not translate, and the `language` arguments are ignored.
 ## Behaviour
 
 **OMDb's answers.** `"N/A"` is read as nothing. `"Response": "False"` with status 200 is "not found"
-(`null`, or `[]`) when its `Error` says "not found" or "Incorrect IMDb ID"; any other `Error` is a
-`ProviderException`.
-
-> [!WARNING]
-> Known defect: `"Error": "Too many results."` - OMDb's answer to a search on a very common word -
-> is a `ProviderException` (`OMDb answered an error for GET /. Too many results.`, seen on a
-> recorded answer in the harness, 2026-10-26), where the README says only a wrong key or the daily
-> limit are errors, and a search with nothing to show is expected to be `[]`.
+(`null`, or `[]`) when its `Error` says "not found" or "Incorrect IMDb ID", and so is "Too many
+results." - OMDb's answer to a search on a very common word: `[]`; any other `Error` (a wrong key,
+the daily limit) is a `ProviderException`.
 
 **Search.** OMDb's first page: ten answers at most. Each is a short record: IMDb number, title,
 year, type, poster. Episodes are dropped.
@@ -150,13 +145,15 @@ Seen in the harness on 2026-10-26, on recorded answers:
 
 ```
 omdb not found     NULL
-omdb too many      ProviderException: OMDb answered an error for GET /. Too many results.
 omdb bad key       ProviderException: OMDb answered 401 for GET /. {"Response":"False","Error":"Invalid API key!"}
 omdb limit         ProviderException: OMDb answered 401 for GET /. {"Response":"False","Error":"Request limit reached!"}
 omdb html 503      ProviderException: OMDb answered 503 for GET /. Service Unavailable
 omdb 200 html      ProviderException: OMDb answered 200 for GET /. The body is not JSON.
 omdb tvdb ref      NotSupportedException: OMDb does not find a series by its tvdb identifier.
 ```
+
+Since 2026-10-29, OMDb's "Too many results." is an empty search (`[]`), no longer a
+`ProviderException` (`OMDb answered an error for GET /. Too many results.` in that run).
 
 A missing `api_key` is an `InvalidConfigException` when the provider is built.
 

@@ -125,7 +125,8 @@ final class OmdbProvider implements ProviderInterface, SearchInterface, LookupIn
             return $answer;
         }
         $error = (string) $answer->string('Error');
-        if (preg_match('~not found|incorrect imdb id~i', $error)) {
+        // Nothing to answer, not a failure: unknown, or a search too broad for OMDb ("Too many results.").
+        if (preg_match('~not found|incorrect imdb id|too many results~i', $error)) {
             return null;
         }
         throw ProviderException::answered('OMDb', 'GET /', 'an error', $error);
